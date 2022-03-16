@@ -91,7 +91,7 @@ def transaction_status(transaction_id):
 
 def distance_between_transaction_user(user_id):
     '''
-    Parameters: transaction id1 and transaction id2
+    Parameters: user id
     Purpose: takes the id of two different transactions and find the distance between them
     Return: the distance between the two different transactions
     '''
@@ -110,4 +110,33 @@ def distance_between_transaction_user(user_id):
                     ids_coordinates.append(id_coordinates)
     distance = ((ids_coordinates[0][0] - ids_coordinates[1][0])**2 + (ids_coordinates[0][1] - ids_coordinates[1][1])**2)**0.5
     return distance
+
+
+def distance_between_transaction_any_user(user_id1, user_id2):
+    '''
+    Parameters: user id
+    Purpose: takes the id of two different transactions and find the distance between them
+    Return: the distance between the two different transactions
+    '''
+    data = load_data()
+    transaction_ids = []
+    ids_coordinates = []
+    for user_id in [user_id1, user_id2]:
+        for index in data[user_id]:
+            print(f'Choose one of the transactions id from the user {user_id} below')
+            print(index[0], end=',')
+            tran_id = input('enter one transaction id from the list above')
+            transaction_ids.append(tran_id)
+    for ids in transaction_ids:
+        for i in data.values():
+            for j in i:
+                if j[0] == str(ids):
+                    id_coordinates = [j[3], j[4]]
+                    ids_coordinates.append(id_coordinates)
+    distance = ((ids_coordinates[0][0] - ids_coordinates[1][0])**2 + (ids_coordinates[0][1] - ids_coordinates[1][1])**2)**0.5
+    return distance
+
+            
+
+
 

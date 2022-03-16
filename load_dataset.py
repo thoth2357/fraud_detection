@@ -6,7 +6,7 @@ def load_data():
     '''
     #try-except clause to catch errors for wrong file name
     try:
-        with open('datasets/test.txt', 'r') as file:
+        with open('datasets/Transaction.txt', 'r') as file:
             lines = [line.rstrip() for line in file] #read from csv line by line, rstrip helps to remove '\n' at the end of line
             results = {}
             for line in lines:

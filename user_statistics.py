@@ -90,7 +90,7 @@ def var_transaction_user(user_id):
 
 def std_transaction_user(user_id):
     '''
-    Parameters: None
+    Parameters: user_id
     Purpose: calculates the standard deviatioin of transaction for a provided user
     Return: standard deviation of transaction amount
     '''
@@ -159,18 +159,24 @@ def distance_between_transaction_any_user(user_id1, user_id2):
     ids_coordinates = []
     for user_id in [user_id1, user_id2]:
         print(f'Choose one of the transactions id from the user {user_id} below')
-        for index in data[user_id]:
-            print(index[0], end=',')
-        tran_id = input('\n enter one transaction id from the list above ')
-        transaction_ids.append(tran_id)
-    for ids in transaction_ids:
-        for i in data.values():
-            for j in i:
-                if j[0] == str(ids):
-                    id_coordinates = [float(j[3]), float(j[4])]
-                    ids_coordinates.append(id_coordinates)
-    distance = ((ids_coordinates[0][0] - ids_coordinates[1][0])**2 + (ids_coordinates[0][1] - ids_coordinates[1][1])**2)**0.5
-    return distance
+        try:
+            for index in data[user_id]:
+                print(index[0], end=',')
+            tran_id = input('\n enter one transaction id from the list above ')
+            transaction_ids.append(tran_id)
+        except Exception:
+            return f'No user with id of {user_id} was found'
+    try:
+        for user_id in [user_id1, user_id2]:
+            for ids in transaction_ids:
+                for i in data[user_id]:
+                        if i[0] == str(ids):
+                            id_coordinates = [float(i[3]), float(i[4])]
+                            ids_coordinates.append(id_coordinates)
+        distance = ((ids_coordinates[0][0] - ids_coordinates[1][0])**2 + (ids_coordinates[0][1] - ids_coordinates[1][1])**2)**0.5
+        return distance
+    except Exception:
+        return f'An exception occurred, either due to wrong user id or transaction id does not match that particular user'
 
 # min_max = user_min_max('21')
 # location_centroid = location_centroid('21')

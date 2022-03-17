@@ -66,7 +66,6 @@ def main():
         distance_transaction_any_user = user_statistics.distance_between_transaction_any_user(user_id, id2)
         print(distance_transaction_any_user)
 
-
 try:
     while True:
         main()

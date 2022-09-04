@@ -28,7 +28,7 @@ def location_centroid(user_id) -> list:
     data = load_data()
     x_coordinates = []
     y_coordinates = []
-    summed_coordinates = []
+    summed_coordinates = [] #this holds the x and y coordinates list
     try:
         for index in data[user_id]:
             x_coordinates.append(float(index[3]))
@@ -132,8 +132,6 @@ def transaction_status(transaction_id) -> dict:
                     "status of the transaction": j[-1],
                     "description of transaction": j[1],
                 }
-            else:
-                return f"No transaction with id of {transaction_id} was found"
 
 
 def distance_between_transaction_user(user_id) -> float:
